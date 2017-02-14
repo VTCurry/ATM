@@ -1,5 +1,4 @@
 package com.novauc;
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
@@ -13,14 +12,13 @@ public class Main {
             System.out.println("What is your name?");
             Scanner scanner = new Scanner(System.in);
 
+            int balance = 100;
             String name = scanner.nextLine();
             if (name.length() == 0) {
                 throw new Exception("Not a valid name.");
-            } else {
-                if (!accounts.containsKey(name)) {
-                    System.out.println("How can we help you? " + name);
-                }
-                double balance = accounts.get(name);
+            }
+
+            while (true) {
                 System.out.println("[1] Check my balance");
                 System.out.println("[2] Withdraw Funds");
                 System.out.println("[3] Cancel");
@@ -38,16 +36,15 @@ public class Main {
                     String amount = scanner.nextLine();
                     int amountNum = Integer.valueOf(amount);
                     if (amountNum > balance) {
-                        System.out.println("ATM currently only has $" + balance);
-                        continue;
+                        System.out.println("Your Account currently only has $" + balance);
                     } else if (amountNum <= balance) {
                         double newBal = (balance - amountNum);
-                        accounts.put(name, newBal);
-                        System.out.println("Your balance is now $" + (balance - amountNum));
+                        System.out.println("Your balance is now $" + newBal);
                         System.out.println("Please take your money.");
+                    }
+
                     }
 
                 }
             }
         }
-    }
